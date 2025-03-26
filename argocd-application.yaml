@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/rgarcia89/make-argocd.git
-    targetRevision: main
+    targetRevision: HEAD
     path: .
     plugin:
       name: make-helm-template
