@@ -1,7 +1,7 @@
 EXPORT_ALL_VARIABLES:
 .ONESHELL:
 
-NAMESPACE := make-argocd
+NAMESPACE := kyverno
 CHARTVERSION := 3.3.7
 
 
@@ -18,5 +18,5 @@ helm-template: helm-prep
 	@echo Templating Chart
 	helm template kyverno  \
 	--namespace $(NAMESPACE) \
-	--version $(CHARTVERSION) $(HELMPARAMETERS) \
+	--version $(CHARTVERSION) \
 	kyverno/kyverno
