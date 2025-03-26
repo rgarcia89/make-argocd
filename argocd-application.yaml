@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: .
     plugin:
-      name: make-helm-template
+      name: make-render
   destination:
     server: https://kubernetes.default.svc
     namespace: trivy
@@ -20,3 +20,11 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true  # Add server-side apply for better performance
+  # Add retry strategy for failed syncs
+  retry:
+    limit: 5
+    backoff:
+      duration: 5s
+      factor: 2
+      maxDuration: 3m
