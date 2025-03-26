@@ -19,6 +19,7 @@ ifeq ($(DEBUG), true)
 	@echo
 	@echo "Templating Chart"
 endif
+	@helm show crds --version $(CHARTVERSION) aqua/trivy-operator
 	@helm template trivy  \
 	--namespace $(NAMESPACE) \
 	--version $(CHARTVERSION) \
