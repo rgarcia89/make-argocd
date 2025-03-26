@@ -20,26 +20,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: make-helm-template-plugin
-  namespace: argocd
-data:
-  plugin.yaml: |
-    apiVersion: argoproj.io/v1alpha1
-    kind: ConfigManagementPlugin
-    metadata:
-      name: make-helm-template
-    spec:
-      generate:
-        command: [sh, -c]
-        args:
-          - |
-            export PROJECT=ap
-            export STAGE=prod
-            export HELMPARAMETERS="--output-dir /tmp/argocd/manifests"
-            mkdir -p /tmp/argocd/manifests
-            make helm-template
-            find /tmp/argocd/manifests -type f -name '*.yaml' -exec cat {} \;
