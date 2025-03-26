@@ -18,5 +18,5 @@ helm-template: helm-prep
 	@echo Templating Chart
 	helm template kyverno  \
 	--namespace $(NAMESPACE) \
-	--version $(CHARTVERSION) \
+	--version $(CHARTVERSION) $(HELMPARAMETERS) \
 	kyverno/kyverno
