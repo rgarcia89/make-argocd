@@ -20,11 +20,10 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true  # Add server-side apply for better performance
-    preserveResourcesOnDeletion: false  # This will delete all resources including the namespace
-  retry:
-    limit: 5
-    backoff:
-      duration: 5s
-      factor: 2
-      maxDuration: 3m
+      - ServerSideApply=true # Add server-side apply for better performance
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
