@@ -1,0 +1,65 @@
+serviceMonitor:
+  enabled: true
+
+targetWorkloads: pod,replicaset,replicationcontroller,statefulset,daemonset,cronjob,job
+
+operator:
+  # -- the flag to enable vulnerability scanner
+  vulnerabilityScannerEnabled: true
+  # -- the flag to enable sbom generation
+  sbomGenerationEnabled: false
+  # -- the flag to enable cluster sbom cache generation
+  clusterSbomCacheEnabled: false
+  # -- scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
+  scannerReportTTL: "4h"
+  # -- configAuditScannerEnabled the flag to enable configuration audit scanner
+  configAuditScannerEnabled: false
+  # -- rbacAssessmentScannerEnabled the flag to enable rbac assessment scanner
+  rbacAssessmentScannerEnabled: false
+  # -- infraAssessmentScannerEnabled the flag to enable infra assessment scanner
+  infraAssessmentScannerEnabled: false
+  # -- clusterComplianceEnabled the flag to enable cluster compliance scanner
+  clusterComplianceEnabled: false
+  # -- batchDeleteLimit the maximum number of config audit reports deleted by the operator when the plugin's config has changed.
+  batchDeleteLimit: 10
+  # -- vulnerabilityScannerScanOnlyCurrentRevisions the flag to only create vulnerability scans on the current revision of a deployment.
+  vulnerabilityScannerScanOnlyCurrentRevisions: true
+  # -- configAuditScannerScanOnlyCurrentRevisions the flag to only create config audit scans on the current revision of a deployment.
+  configAuditScannerScanOnlyCurrentRevisions: false
+  # -- batchDeleteDelay the duration to wait before deleting another batch of config audit reports.
+  batchDeleteDelay: 10s
+  # -- accessGlobalSecretsAndServiceAccount The flag to enable access to global secrets/service accounts to allow `vulnerability scan job` to pull images from private registries
+  accessGlobalSecretsAndServiceAccount: false
+  # -- builtInTrivyServer The flag enable the usage of built-in trivy server in cluster ,its also override the following trivy params with built-in values
+  # trivy.mode = ClientServer and serverURL = http://<serverServiceName>.<trivy operator namespace>:4975
+  builtInTrivyServer: false
+  # -- builtInServerRegistryInsecure is the flag to enable insecure connection from the built-in Trivy server to the registry.
+  builtInServerRegistryInsecure: false
+  # -- controllerCacheSyncTimeout the duration to wait for controller resources cache sync (default: 5m).
+  controllerCacheSyncTimeout: "5m"
+  # -- exposedSecretScannerEnabled the flag to enable exposed secret scanner
+  exposedSecretScannerEnabled: false
+
+trivy:
+  # -- severity is a comma separated list of severity levels reported by Trivy.
+  severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+
+  # -- slow this flag is to use less CPU/memory for scanning though it takes more time than normal scanning. It fits small-footprint
+  slow: true
+  # -- ignoreUnfixed is the flag to show only fixed vulnerabilities in
+  # vulnerabilities reported by Trivy. Set to true to enable it.
+  #
+  ignoreUnfixed: true
+
+  # ignoreFile:
+    # - CVE-2024-3817 # https://github.com/aquasecurity/trivy-operator/issues/2022
+
+  # -- a comma separated list of file paths for Trivy to skip
+  # gosu - false positives https://github.com/tianon/gosu/blob/master/SECURITY.md
+  skipFiles: /usr/local/bin/trivy,/var/trivyoperator/trivy,/usr/local/bin/gosu
+
+  # -- timeout is the duration to wait for scan completion.
+  timeout: "5m0s"
+
+  # -- vulnType can be used to tell Trivy to filter vulnerabilities by a pkg-type (library, os)
+  vulnType: os,library

@@ -36,7 +36,7 @@ ifeq ($(DEBUG), true)
 endif
 	@helm template trivy \
 	--namespace $(NAMESPACE) \
-	--set serviceMonitor.enabled=true \
+	--values values.yaml \
 	--version $(CHARTVERSION) \
 	aqua/trivy-operator
 
