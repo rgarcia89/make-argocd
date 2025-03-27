@@ -37,6 +37,7 @@ endif
 	@helm template trivy \
 	--namespace $(NAMESPACE) \
 	--values values.yaml \
+	--api-versions monitoring.coreos.com/v1 \
 	--version $(CHARTVERSION) \
 	aqua/trivy-operator
 
