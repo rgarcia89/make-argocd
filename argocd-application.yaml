@@ -21,7 +21,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true  # Add server-side apply for better performance
-  # Add retry strategy for failed syncs
+    preserveResourcesOnDeletion: false  # This will delete all resources including the namespace
   retry:
     limit: 5
     backoff:

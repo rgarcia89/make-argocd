@@ -34,8 +34,9 @@ ifeq ($(DEBUG), true)
 	@echo
 	@echo "Templating Chart"
 endif
-	@helm template trivy  \
+	@helm template trivy \
 	--namespace $(NAMESPACE) \
+	--set serviceMonitor.enabled=true \
 	--version $(CHARTVERSION) \
 	aqua/trivy-operator
 
