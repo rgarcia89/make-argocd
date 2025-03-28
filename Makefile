@@ -2,7 +2,7 @@ EXPORT_ALL_VARIABLES:
 .ONESHELL:
 
 CHARTVERSION := 0.27.0
-ENV ?= staging
+ENV ?= $(or $(ARGOCD_ENV_ENV),staging)
 NAMESPACE := trivy
 
 .PHONY: render
