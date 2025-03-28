@@ -10,6 +10,7 @@ spec:
   source:
     repoURL: https://github.com/rgarcia89/make-argocd.git
     targetRevision: HEAD
+    path: .
     plugin:
       name: make-render
   destination:
