@@ -13,7 +13,7 @@ render: helm-template
 
 .PHONY: deploy-app
 deploy-app:
-	kubectl apply -n argocd -k ./$(ENV)
+	kubectl apply -n argocd -k ./environments/$(ENV)
 
 .PHONY: helm-prep
 helm-prep:
