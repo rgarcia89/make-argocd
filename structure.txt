@@ -1,0 +1,13 @@
+make-argocd/
+├── base/
+│   ├── application.yaml     # Base ArgoCD application
+│   ├── kustomization.yaml   # Base kustomization (new file)
+│   └── values.yaml         # Base values
+├── environments/
+│   ├── staging/
+│   │   ├── kustomization.yaml
+│   │   └── values.yaml
+│   └── production/
+│       ├── kustomization.yaml
+│       └── values.yaml
+└── Makefile                 # Your existing Makefile

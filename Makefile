@@ -11,6 +11,10 @@ render: helm-template
 # .PHONY: deploy
 # deploy: helm-install
 
+.PHONY: deploy-app
+deploy-app:
+	kubectl apply -n argocd -k ./$(ENV)
+
 .PHONY: helm-prep
 helm-prep:
 ifeq ($(DEBUG), true)
@@ -38,7 +42,7 @@ endif
 	@helm template trivy \
 	--namespace $(NAMESPACE) \
 	--values base/values.yaml \
-	--values environments/$(ENV)/values.yaml \
+	--values $(ENV)/values.yaml \
 	--api-versions monitoring.coreos.com/v1 \
 	--version $(CHARTVERSION) \
 	aqua/trivy-operator

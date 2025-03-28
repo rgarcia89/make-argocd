@@ -10,12 +10,8 @@ spec:
   source:
     repoURL: https://github.com/rgarcia89/make-argocd.git
     targetRevision: HEAD
-    path: environments/production
     plugin:
       name: make-render
-      env:
-        - name: ENV
-          value: production
   destination:
     server: https://kubernetes.default.svc
     namespace: trivy
