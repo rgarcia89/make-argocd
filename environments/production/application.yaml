@@ -3,14 +3,19 @@ kind: Application
 metadata:
   name: trivy
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
     repoURL: https://github.com/rgarcia89/make-argocd.git
     targetRevision: HEAD
-    path: .
+    path: environments/production
     plugin:
       name: make-render
+      env:
+        - name: ENV
+          value: production
   destination:
     server: https://kubernetes.default.svc
     namespace: trivy
@@ -20,10 +25,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true # Add server-side apply for better performance
-    retry:
-      limit: 5
-      backoff:
-        duration: 5s
-        factor: 2
-        maxDuration: 3m

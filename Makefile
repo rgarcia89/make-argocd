@@ -1,8 +1,9 @@
 EXPORT_ALL_VARIABLES:
 .ONESHELL:
 
-NAMESPACE := trivy
 CHARTVERSION := 0.27.0
+ENV ?= staging
+NAMESPACE := trivy
 
 .PHONY: render
 render: helm-template
@@ -32,11 +33,12 @@ endif
 helm-template: helm-prep helm-crds
 ifeq ($(DEBUG), true)
 	@echo
-	@echo "Templating Chart"
+	@echo "Templating Chart for $(ENV) environment"
 endif
 	@helm template trivy \
 	--namespace $(NAMESPACE) \
-	--values values.yaml \
+	--values base/values.yaml \
+	--values environments/$(ENV)/values.yaml \
 	--api-versions monitoring.coreos.com/v1 \
 	--version $(CHARTVERSION) \
 	aqua/trivy-operator
