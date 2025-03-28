@@ -3,8 +3,10 @@ kind: Application
 metadata:
   name: trivy
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
+  # annotations:
+  # only the resources specified by this annotation will be sent to the CMP server for manifest generation, rather than the entire repositor
+  # resolves to 'my-application' and 'shared'
+  #   argocd.argoproj.io/manifest-generate-paths: .;../shared
 spec:
   project: default
   source:
@@ -22,3 +24,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
