@@ -1,2 +1,4 @@
 operator:
   replicas: 1
+
+nameOverride: "staging-trivy"

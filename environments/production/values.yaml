@@ -1,2 +1,4 @@
 operator:
   replicas: 2
+
+nameOverride: "production-trivy"
